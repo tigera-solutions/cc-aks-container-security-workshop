@@ -1,0 +1,15 @@
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: security.block-snort
+spec:
+  tier: security
+  order: 150
+  selector: threatfeed == 'snort'
+  types:
+    - Egress
+  egress:
+    - action: Deny
+      destination:
+        selector: threatfeed == 'snort'
+    - action: Pass
