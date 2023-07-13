@@ -40,7 +40,7 @@ Module 4 - [Scan Container Images](modules/module-4-scan-images.md)</br>
 Module 5 - [Calico Cloud Admission Controller](modules/module-5-admission-controller.md)</br>
 Module 6 - [Zero-trust access control using identity-aware microsegmentation](modules/module-6-zerotrust.md)</br>
 Module 7 - [Runtime security with IDS/IPS using Deep Packet Inspection](modules/module-7-runtimesec.md)</br>
-Module 8 - [Enabling End to End Encryption with WireGuard](modules/module-8-threatfeed.md)</br>
+Module 8 - [Global Threatfeeds](modules/module-8-threatfeed.md)</br>
 Module 9 - [Traffic visualization inside your Kubernetes Cluster](modules/module-9-visibility.md)</br>
 Module 10 - [Clean up](modules/module-10-cleanup.md)</br>
 
