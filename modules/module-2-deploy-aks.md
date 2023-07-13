@@ -93,11 +93,11 @@
 
    The output will ne something similar to the this:
    <pre>
-    Kubernetes control plane is running at https://aks-shift--rg-shift-left-wo-03cfb8-z5n2y68t.hcp.canadacentral.azmk8s.io:443
-    CoreDNS is running at https://aks-shift--rg-shift-left-wo-03cfb8-z5n2y68t.hcp.canadacentral.azmk8s.io:443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
-    Metrics-server is running at https://aks-shift--rg-shift-left-wo-03cfb8-z5n2y68t.hcp.canadacentral.azmk8s.io:443/api/v1/namespaces/kube-system/services/https:metrics-server:/proxy
+   Kubernetes control plane is running at https://kartik-aks-kartik-rg-csec-w-03cfb8-i568hfhr.hcp.canadacentral.azmk8s.io:443
+   CoreDNS is running at https://kartik-aks-kartik-rg-csec-w-03cfb8-i568hfhr.hcp.canadacentral.azmk8s.io:443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+   Metrics-server is running at https://kartik-aks-kartik-rg-csec-w-03cfb8-i568hfhr.hcp.canadacentral.azmk8s.io:443/api/v1/namespaces/kube-system/services/https:metrics-server:/proxy
 
-    To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+   To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
    </pre>
 
    You should now have a Kubernetes cluster running with 2 nodes. You do not see the master servers for the cluster because these are managed by Microsoft. The Control Plane services which manage the Kubernetes cluster such as scheduling, API access, configuration data store and object controllers are all provided as services to the nodes.
