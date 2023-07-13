@@ -54,6 +54,9 @@ Cisco maintains an updated dynamic IP block list as part of SNORT, and this list
 
   This time around the network policy kicks in and denies the flow. The service graph as well as the flow logs confirms the deny action.
 
+  <img width="1477" alt="Screen Shot 2023-07-13 at 10 23 08 AM" src="https://github.com/tigera-solutions/cc-aks-container-security-workshop/assets/117195889/db02b3be-b16c-4f02-92aa-26a0e7f2b05f">
+
+
 [:arrow_right: Module 9 - Traffic visualization inside your Kubernetes Cluster](module-9-visibility.md) <br>
 
 [:arrow_left: Module 7 - Runtime security with IDS/IPS using Deep Packet Inspection](module-7-runtimesec.md)
