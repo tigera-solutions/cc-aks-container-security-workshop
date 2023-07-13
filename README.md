@@ -1,4 +1,4 @@
-# Microsoft Azure: Hands-on AKS workshop </br> Shift-left security with Vulnerability Management in AKS and Calico Cloud
+# Microsoft Azure: Hands-on AKS workshop </br> Container security in AKS and Calico Cloud
 
 ## Welcome
 
