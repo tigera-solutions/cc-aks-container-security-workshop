@@ -4,12 +4,12 @@
 
 1. Download the latest version of the Tigera CLI scanner.
 
-   [Installations Instructions](https://docs.calicocloud.io/image-assurance/scan-image-registries#start-the-cli-scanner)
+   [Installations Instructions](https://docs.tigera.io/calico-cloud/image-assurance/scanners/pipeline-scanner#start-the-scanner)
 
    Linux
 
    ```bash
-   curl -Lo tigera-scanner https://installer.calicocloud.io/tigera-scanner/v3.16.1-11/image-assurance-scanner-cli-linux-amd64
+   curl -Lo tigera-scanner https://installer.calicocloud.io/tigera-scanner/v3.18.0-1.1-1/image-assurance-scanner-cli-linux-amd64
    sudo chmod +x ./tigera-scanner
    sudo mv ./tigera-scanner /usr/local/bin
    tigera-scanner version
@@ -18,7 +18,7 @@
    MacOS
 
    ```bash
-   curl -Lo tigera-scanner https://installer.calicocloud.io/tigera-scanner/v3.16.1-11/image-assurance-scanner-cli-darwin-amd64
+   curl -Lo tigera-scanner https://installer.calicocloud.io/tigera-scanner/v3.18.0-1.1-1/image-assurance-scanner-cli-darwin-amd64
    sudo chmod +x ./tigera-scanner
    sudo mv ./tigera-scanner /usr/local/bin
    tigera-scanner version
@@ -102,13 +102,13 @@ Lets pull an image:
    Run the `tigera-scanner` passing the `apiurl` and `token` parameters, so the result will be exported to Calico Cloud.
 
    ```bash
-   tigera-scanner scan registry.hub.docker.com/regisftm/website:v1.0.0 --apiurl $APIURL --token $APITOKEN
+   tigera-scanner scan registry.hub.docker.com/regisftm/website:v1.0.0 -f 7.9 -w 3.9 --apiurl $APIURL --token $APITOKEN
    ```
 
    This is the expected output.
 
    <pre>
-   $ tigera-scanner scan registry.hub.docker.com/regisftm/website:v1.0.0 --apiurl $APIURL --token $APITOKEN
+   $ tigera-scanner scan registry.hub.docker.com/regisftm/website:v1.0.0 -f 7.9 -w 3.9 --apiurl $APIURL --token $APITOKEN
    INFO[0001] Vulnerability database director not set, setting it to the cache default direct /home/ec2-user/.cache.
 
     scanning registry.hub.docker.com/regisftm/website:v1.0.0...
