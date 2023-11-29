@@ -13,7 +13,7 @@ Issues with being unable to navigate menus in the UI are often due to browsers b
 
 3. Once you have access to your **Calico Cloud** environment, go to step 2:
 
-## Step 2 - Connecting your cluster to Calico Cloud.
+## Step 2 - Connecting your cluster to Calico Cloud
 
 1. The welcome screen will allow you to choose among four use cases and will provide a guided tour for each use case. After that you can proceed to connect your first cluster. This option directs you to the **Managed Clusters** section. Click on the "**Connect Cluster**" button to start the process.
 
@@ -78,7 +78,55 @@ Issues with being unable to navigate menus in the UI are often due to browsers b
 
     ![monitor-install](https://github.com/tigera-solutions/cc-aks-shift-left-workshop/assets/117195889/978cb58e-85b6-43b0-a32e-90850684e78f)
 
-## STEP 3 - Selecting your cluster.
+---
+
+## STEP 3 - Enviroment Preparation
+
+1. Decrease the time to collect flow logs
+
+   By default, flow logs are collected every 5 minutes. We will decrease that time to 15 seconds, which will increase the amount of information we must store, and while that is not recommended for production environments, it will help to speed up the time in which events are seen within Calico observability features.
+
+   ```bash
+   kubectl patch felixconfiguration default -p '{"spec":{"flowLogsFlushInterval":"15s"}}'
+   kubectl patch felixconfiguration default -p '{"spec":{"dnsLogsFlushInterval":"15s"}}'
+   kubectl patch felixconfiguration default -p '{"spec":{"flowLogsFileAggregationKindForAllowed":1}}'
+   kubectl patch felixconfiguration default -p '{"spec":{"flowLogsFileAggregationKindForDenied":0}}'
+   kubectl patch felixconfiguration default -p '{"spec":{"dnsLogsFileAggregationKind":0}}'
+   ```
+
+   Configure Felix to collect TCP stats - this uses eBPF TC program and requires miniumum Kernel version of v5.3.0/v4.18.0-193. Further documentation.
+
+   ```bash
+   kubectl patch felixconfiguration default -p '{"spec":{"flowLogsCollectTcpStats":true}}'
+   ```
+
+   Enable ApplicationLayer Envoy pods to enable L7 stats
+
+   ```bash
+   kubectl apply -f manifests/04-applayer.yml
+   ```
+
+2. Install demo applications
+
+   Deploy the dev app stack
+
+   ```bash
+   kubectl apply -f manifests/20-dev-app.yaml
+   ```
+
+   Deploy the Online Boutique app stack
+
+   ```bash
+   kubectl apply -f manifests/30-kubernetes-manifests.yaml
+   ```
+
+   Enable L7 logs for the nginx service
+
+   ```bash
+   kubectl annotate svc nginx-svc -n dev projectcalico.org/l7-logging=true
+   ```
+
+## STEP 4 - Selecting your cluster
 
 Once the installation is completed, you will be able to start interacting with your cluster from the Calico Cloud interface. Calico Cloud provides a single pane of glass for managing multiple clusters. If you followed the previous steps, you would have two clusters connected to Calico Cloud at this point: Your cluster and a pre-configured lab cluster that allows you to explore some of the features in Calico Cloud.
 
