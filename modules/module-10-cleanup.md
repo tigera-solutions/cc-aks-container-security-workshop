@@ -4,6 +4,7 @@
 
    ```bash
    kubectl delete -f manifests/20-dev-app.yaml
+   kubectl delete -f manifests/30-kubernetes-manifests.yaml
    kubectl delete -f manifests/00-namespaces.yaml
    ```
 
