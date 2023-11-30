@@ -2,6 +2,8 @@
 
 1. Upgrade the OpenSSL from 1.0 to 1.1 (if needed in your environment)
 
+   >This step is not necessary if your environment already has OpenSSL 1.1 - `openssl version`
+
    ```bash
    sudo yum -y update
    sudo yum install -y make gcc perl-core pcre-devel wget zlib-devel
@@ -26,9 +28,9 @@
    # Create workdir
    mkdir admission-controller-install && cd admission-controller-install
    # Generate certs
-   export URL="https://installer.calicocloud.io/manifests/v3.16.1-11/manifests" && curl ${URL}/generate-open-ssl-key-cert-pair.sh | bash
+   export URL="https://installer.calicocloud.io/manifests/v3.18.0-1.1-2/manifests" && curl ${URL}/generate-open-ssl-key-cert-pair.sh | bash
    # Generate admission controller manifests
-   export URL="https://installer.calicocloud.io/manifests/v3.16.1-11/manifests" && \
+   export URL="https://installer.calicocloud.io/manifests/v3.18.0-1.1-2/manifests" && \
    export IN_NAMESPACE_SELECTOR_KEY="apply-container-policies" && \
    export IN_NAMESPACE_SELECTOR_VALUES="true" && \
    curl ${URL}/install-ia-admission-controller.sh | bash
@@ -42,9 +44,9 @@
    # Create workdir
    mkdir admission-controller-install && cd admission-controller-install
    # Generate certs
-   export URL="https://installer.calicocloud.io/manifests/v3.16.1-11/manifests" && curl ${URL}/generate-open-ssl-key-cert-pair.sh | bash
+   export URL="https://installer.calicocloud.io/manifests/v3.18.0-1.1-2/manifests" && curl ${URL}/generate-open-ssl-key-cert-pair.sh | bash
    # Generate admission controller manifests
-   export URL="https://installer.calicocloud.io/manifests/v3.16.1-11/manifests" && \
+   export URL="https://installer.calicocloud.io/manifests/v3.18.0-1.1-2/manifests" && \
    export IN_NAMESPACE_SELECTOR_KEY="apply-container-policies" && \
    export IN_NAMESPACE_SELECTOR_VALUES="true" && \
    bash install-ia-admission-controller-macos.sh
@@ -96,7 +98,7 @@
    kubectl label namespace website apply-container-policies=true
    ```
 
-5. Deploy the application to test the enviroment.
+5. Deploy the application to test the environment.
 
    ```bash
    kubectl create -f manifests/website.yaml
@@ -138,8 +140,8 @@
     ```bash
     kubectl get pods -n website
     ```
-   
-   --- 
+
+   ---
 
 [:arrow_right: Module 6 - Zero-trust access control using identity-aware microsegmentation](module-6-zerotrust.md ) <br>
 

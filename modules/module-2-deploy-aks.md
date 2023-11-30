@@ -16,10 +16,12 @@
    export RESOURCE_GROUP=rg-csec-workshop
    export CLUSTERNAME=aks-csec-workshop
    export LOCATION=canadacentral
+   export K8S_VERSION=1.26
    # Persist for later sessions in case of disconnection.
    echo export RESOURCE_GROUP=$RESOURCE_GROUP >> envLabVars.env
    echo export CLUSTERNAME=$CLUSTERNAME >> envLabVars.env
    echo export LOCATION=$LOCATION >> envLabVars.env
+   echo export K8S_VERSION=$K8S_VERSION >> envLabVars.env
    ```
 
 2. If not created, create the Resource Group in the desired Region.
@@ -36,7 +38,7 @@
    az aks create \
      --resource-group $RESOURCE_GROUP \
      --name $CLUSTERNAME \
-     --kubernetes-version 1.25 \
+     --kubernetes-version $K8S_VERSION \
      --location $LOCATION \
      --node-count 2 \
      --node-vm-size Standard_B4ms \
@@ -108,7 +110,7 @@
    az aks show --resource-group $RESOURCE_GROUP --name $CLUSTERNAME --query 'networkProfile'
    ```
 
-   You should see "networkPlugin": "azure" and "networkPolicy": null (networkPolicy will just not show if it is null).
+   You should see "networkPlugin": "azure" and "networkPolicy": null (networkPolicy may not show if it is null).
 
 8. Verify the transparent mode by running the following command in one node
 
@@ -119,54 +121,6 @@
    ```
 
    > output should contain "mode": "transparent"
-
----
-
-## Enviroment Preparation
-
-### Decrease the time to collect flow logs
-
-By default, flow logs are collected every 5 minutes. We will decrease that time to 15 seconds, which will increase the amount of information we must store, and while that is not recommended for production environments, it will help to speed up the time in which events are seen within Calico observability features.
-
-```bash
-kubectl patch felixconfiguration default -p '{"spec":{"flowLogsFlushInterval":"15s"}}'
-kubectl patch felixconfiguration default -p '{"spec":{"dnsLogsFlushInterval":"15s"}}'
-kubectl patch felixconfiguration default -p '{"spec":{"flowLogsFileAggregationKindForAllowed":1}}'
-kubectl patch felixconfiguration default -p '{"spec":{"flowLogsFileAggregationKindForDenied":0}}'
-kubectl patch felixconfiguration default -p '{"spec":{"dnsLogsFileAggregationKind":0}}'
-```
-
-Configure Felix to collect TCP stats - this uses eBPF TC program and requires miniumum Kernel version of v5.3.0/v4.18.0-193. Further documentation.
-
-```bash
-kubectl patch felixconfiguration default -p '{"spec":{"flowLogsCollectTcpStats":true}}'
-```
-
-Enable ApplicationLayer Envoy pods to enable L7 stats
-
-```bash
-kubectl apply -f manifests/04-applayer.yml
-```
-
-### Install demo applications
-
-Deploy the dev app stack
-
-```bash
-kubectl apply -f manifests/20-dev-app.yaml
-```
-
-Deploy the Online Boutique app stack
-
-```bash
-kubectl apply -f manifests/30-kubernetes-manifests.yaml
-```
-
-Enable L7 logs for the nginx service
-
-```bash
-kubectl annotate svc nginx-svc -n dev projectcalico.org/l7-logging=true
-```
 
 ---
 

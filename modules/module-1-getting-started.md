@@ -20,8 +20,8 @@ The following are the basic requirements to **start** the workshop.
 4. Once your cloud shell is started, clone the workshop repo into the cloud shell environment
 
    ```bash
-   git clone https://github.com/tigera-solutions/cc-aks-shift-left-workshop.git && \
-   cd cc-aks-shift-left-workshop
+   git clone https://github.com/tigera-solutions/cc-aks-container-security-workshop.git && \
+   cd cc-aks-container-security-workshop
    ```
 
    > Note: In the cloud shell, you are automatically logged into your Azure subscription.

@@ -39,12 +39,6 @@ configured to trigger automatic remediation.
 
 2. Attack the nginx service
 
-   [Sid 1-21562 - MALWARE-CNC Win.Trojan.Bredolab variant outbound connection](https://www.snort.org/rule_docs/1-21562) 
-
-   ```bash
-   kubectl -n dev exec -t netshoot -- sh -c "curl -m2 http://nginx-svc/ -H 'User-Agent: Mozilla/4.0' -XPOST --data-raw 'smk=1234'"
-   ```
-
    [Sid 1-57461 - MALWARE-BACKDOOR Perl.Backdoor.PULSECHECK variant cnc connection](https://www.snort.org/rule_docs/1-57461)
 
    ```bash
@@ -61,6 +55,12 @@ configured to trigger automatic remediation.
 
    ```bash
    kubectl -n dev exec -t netshoot -- sh -c "curl -m2 http://nginx-svc/NessusTest"
+   ```
+
+   [Sid 1-21562 - MALWARE-CNC Win.Trojan.Bredolab variant outbound connection](https://www.snort.org/rule_docs/1-21562)
+
+   ```bash
+   kubectl -n dev exec -t netshoot -- sh -c "curl -m2 http://nginx-svc/ -H 'User-Agent: Mozilla/4.0' -XPOST --data-raw 'smk=1234'"
    ```
 
    [Check the Snort ID here!](https://www.snort.org/search)
