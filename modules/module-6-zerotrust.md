@@ -45,7 +45,6 @@ We recommend that you create a global default deny policy after you complete wri
 
    The staged policy does not affect the traffic directly but allows you to view the policy impact if it were to be enforced. You can see the deny traffic in staged policy.
 
-
 2. Create other network policies to individually allow the traffic shown as blocked in step 1, until no connections are denied.
   
    First, create the policy tiers. Tiers are a hierarchical construct used to group policies and enforce higher precedence policies that cannot be circumvented by other teams. As you will learn in this tutorial, tiers have built-in features that support workload microsegmentation.
@@ -107,19 +106,19 @@ We recommend that you create a global default deny policy after you complete wri
    ```
 
    b. The connections across dev/centos pod and default/frontend pod should be blocked by the policy, as it is not explictly allowing this egress traffic. The expected result is `command terminated with exit code 1`.
-   
-   ```bash   
+
+   ```bash
    kubectl -n dev exec -t centos -- sh -c 'curl -m3 -sI http://frontend.default 2>/dev/null | grep HTTP'
    ```
 
    c. Test connectivity from each namespace dev and default to the Internet. The expected result is `command terminated with exit code 1`.
-   
-   ```bash   
+
+   ```bash
    kubectl -n dev exec -t centos -- sh -c 'curl -m3 -sI http://www.google.com 2>/dev/null | grep HTTP'
    ```
 
    Implement a policy to explicit allow egress access from a workload dev/centos to default/frontend.
-   
+
    a. Deploy egress policy between two namespaces dev and default.
 
    ```yaml
@@ -148,7 +147,7 @@ We recommend that you create a global default deny policy after you complete wri
 
    b. Test connectivity between dev/centos pod and default/frontend service again, should be allowed now. The output should be `HTTP/1.1 200 OK`.
 
-   ```bash   
+   ```bash
    kubectl -n dev exec -t centos -- sh -c 'curl -m3 -sI http://frontend.default 2>/dev/null | grep HTTP'
    ```
 
@@ -185,11 +184,11 @@ We recommend that you create a global default deny policy after you complete wri
    ```
 
 3. Use the Calico Cloud GUI to enforce the default-deny staged policy. After enforcing a staged policy, it takes effect immediatelly. The default-deny policy will start to actually deny traffic.
-   
+
 ---
 
 [:arrow_right: Module 7 - Runtime security with IDS/IPS using Deep Packet Inspection](module-7-runtimesec.md) <br>
 
 [:arrow_left: Module 5 - Calico Cloud Admission Controller](module-5-admission-controller.md)
 
-[:leftwards_arrow_with_hook: Back to Main](../README.md) 
+[:leftwards_arrow_with_hook: Back to Main](../README.md)
